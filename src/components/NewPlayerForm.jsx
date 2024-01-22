@@ -11,10 +11,10 @@ const NewPlayerForm = ({ setAllPlayers, fetchPlayers }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await fetch(
-        'https://fsa-puppy-bowl.herokuapp.com/api/2310-fsa-et-web-pt-sf/players',
+        'https://fsa-puppy-bowl.herokuapp.com/api/2306-fsa-et-web-pt-sf/players',
         {
           method: 'POST',
           headers: {
@@ -28,9 +28,10 @@ const NewPlayerForm = ({ setAllPlayers, fetchPlayers }) => {
           }),
         }
       );
-
+  
       if (response.ok) {
-        const newPlayer = await response.json();
+        const result = await response.json();
+        const newPlayer = result.data.newPlayer;  // Access newPlayer from result.data
         setAllPlayers((prevPlayers) => [...prevPlayers, newPlayer]);
         fetchPlayers();
         setTimeout(() => {
@@ -43,6 +44,8 @@ const NewPlayerForm = ({ setAllPlayers, fetchPlayers }) => {
       console.error(error);
     }
   };
+
+
 
   return (
     <>
