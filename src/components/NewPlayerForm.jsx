@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const NewPlayerForm = () => {
+const NewPlayerForm = ({ setAllPlayers, fetchPlayers }) => {
   const [name, setName] = useState('');
   const [breed, setBreed] = useState('');
   const [status, setStatus] = useState('');
@@ -30,7 +30,12 @@ const NewPlayerForm = () => {
       );
 
       if (response.ok) {
-        navigate('/AllPlayers');
+        const newPlayer = await response.json();
+        setAllPlayers((prevPlayers) => [...prevPlayers, newPlayer]);
+        fetchPlayers();
+        setTimeout(() => {
+          navigate('/AllPlayers');
+        }, 0);
       } else {
         console.error('Failed to create a new player');
       }
@@ -41,53 +46,53 @@ const NewPlayerForm = () => {
 
   return (
     <>
-    <div className="PCardSubmit">
-      <h1>New Player <br/> Form</h1>
-      <form onSubmit={handleSubmit}>
-        <label className="labels">
-          Name:
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </label>
-        <br />
-        <label className="labels">
-          Breed:
-          <input
-            type="text"
-            value={breed}
-            onChange={(e) => setBreed(e.target.value)}
-            required
-          />
-        </label>
-        <br />
-        <label className="labels">
-          Status:
-          <input
-            type="text"
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            required
-          />
-        </label>
-        <br />
-        <label className="labels">
-          Image:
-          <input
-            type="url"
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
-            required
-          />
-        </label>
-        <br />
-        <button type="submit" className="detailButton">Add Player</button>
-      </form>
-    </div>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+      <div className="PCardSubmit">
+        <h1>New Player <br/> Form</h1>
+        <form onSubmit={handleSubmit}>
+          <label className="labels">
+            Name:
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </label>
+          <br />
+          <label className="labels">
+            Breed:
+            <input
+              type="text"
+              value={breed}
+              onChange={(e) => setBreed(e.target.value)}
+              required
+            />
+          </label>
+          <br />
+          <label className="labels">
+            Status:
+            <input
+              type="text"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+              required
+            />
+          </label>
+          <br />
+          <label className="labels">
+            Image:
+            <input
+              type="url"
+              value={imageUrl}
+              onChange={(e) => setImageUrl(e.target.value)}
+              required
+            />
+          </label>
+          <br />
+          <button type="submit" className="detailButton">Add Player</button>
+        </form>
+      </div>
+      <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </>
   );
 };

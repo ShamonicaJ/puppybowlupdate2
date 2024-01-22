@@ -1,24 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function AllPlayers() {
-  const [players, setPlayers] = useState([])
+export default function AllPlayers({ allPlayers }) {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    async function fetchPlayers() {
-      try {
-        const response = await fetch(
-          "https://fsa-puppy-bowl.herokuapp.com/api/2109-UNF-HY-WEB-PT/players"
-        );
-        const result = await response.json();
-        setPlayers(result.data.players);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    fetchPlayers()
-  }, [])
 
   const onClick = (id) => {
     navigate(`/Details/${id}`);
@@ -26,7 +10,7 @@ export default function AllPlayers() {
 
   return (
     <div className="Players">
-      {players.map((player) => (
+      {allPlayers.map((player) => (
         <div key={player.id} className="PCard">
           <img src={player.imageUrl} alt={player.name} />
 
