@@ -11,7 +11,7 @@ const PlayerDetails = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          `https://fsa-puppy-bowl.herokuapp.com/api/2306-fsa-et-web-pt-sf/players/${id}`
+          `https://fsa-puppy-bowl.herokuapp.com/api/2310-fsa-et-web-pt-sf/players/${id}`
         );
         if (!response.ok) {
           console.error('Failed to fetch player details');

@@ -9,7 +9,7 @@ export default function SinglePlayerDelete() {
     async function fetchPlayers() {
       try {
         const response = await fetch(
-          "https://fsa-puppy-bowl.herokuapp.com/api/2306-fsa-et-web-pt-sf/players"
+          "https://fsa-puppy-bowl.herokuapp.com/api/2310-fsa-et-web-pt-sf/players"
         );
         const result = await response.json();
         setPlayers(result.data.players);
@@ -24,7 +24,7 @@ export default function SinglePlayerDelete() {
     try {
       // Make an API call to delete the player on the server
       await fetch(
-        `https://fsa-puppy-bowl.herokuapp.com/api/2306-fsa-et-web-pt-sf/players/${id}`,
+        `https://fsa-puppy-bowl.herokuapp.com/api/2310-fsa-et-web-pt-sf/players/${id}`,
         {
           method: 'DELETE',
           headers: {
